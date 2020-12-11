@@ -10,6 +10,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_12_11_202949) do
 
+  create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "text"
+    t.bigint "survey_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["survey_id"], name: "index_questions_on_survey_id"
+  end
+
+  create_table "response_options", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "input_type"
+    t.string "text"
+    t.bigint "question_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_response_options_on_question_id"
+  end
+
+  create_table "responses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "survey_id", null: false
+    t.bigint "question_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "response_option_id"
+    t.string "text"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_responses_on_question_id"
+    t.index ["response_option_id"], name: "index_responses_on_response_option_id"
+    t.index ["survey_id"], name: "index_responses_on_survey_id"
+    t.index ["user_id"], name: "index_responses_on_user_id"
+  end
+
+  create_table "surveys", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.date "due_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email_address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "questions", "surveys"
+  add_foreign_key "response_options", "questions"
+  add_foreign_key "responses", "questions"
+  add_foreign_key "responses", "response_options"
+  add_foreign_key "responses", "surveys"
+  add_foreign_key "responses", "users"
 end
