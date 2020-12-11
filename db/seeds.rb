@@ -1,13 +1,8 @@
+Response.destroy_all
 ResponseOption.destroy_all
 Question.destroy_all
 Survey.destroy_all
 User.destroy_all
-
-sam = User.create(
-  first_name: 'Sam',
-  last_name: 'Evans',
-  email_address: 'evans.sam.t@gmail.com'
-)
 
 survey1 = Survey.create(
   name: 'Survey1',
@@ -19,17 +14,19 @@ question1 = Question.create(
   text: 'What is your gender?'
 )
 
-ResponseOption.create(
+question1option1 = ResponseOption.create(
   question_id: question1.id,
   input_type: 'radio',
   text: 'Male'
 )
-ResponseOption.create(
+
+question1option2 = ResponseOption.create(
   question_id: question1.id,
   input_type: 'radio',
   text: 'Female'
 )
-ResponseOption.create(
+
+question1option3 = ResponseOption.create(
   question_id: question1.id,
   input_type: 'radio',
   text: 'Decline to answer'
@@ -40,7 +37,7 @@ question2 = Question.create(
   text: 'How old are you?'
 )
 
-ResponseOption.create(
+question2option1 = ResponseOption.create(
   question_id: question2.id,
   input_type: 'number'
 )
@@ -50,7 +47,36 @@ question3 = Question.create(
   text: 'What is your first name?'
 )
 
-ResponseOption.create(
+question3option1 = ResponseOption.create(
   question_id: question3.id,
   input_type: 'text'
+)
+
+sam = User.create(
+  first_name: 'Sam',
+  last_name: 'Evans',
+  email_address: 'evans.sam.t@gmail.com'
+)
+
+Response.create(
+  survey_id: survey1.id,
+  question_id: question1.id,
+  user_id: sam.id,
+  response_option_id: question1option1.id
+)
+
+Response.create(
+  survey_id: survey1.id,
+  question_id: question2.id,
+  user_id: sam.id,
+  response_option_id: question2option1.id,
+  text: 30
+)
+
+Response.create(
+  survey_id: survey1.id,
+  question_id: question3.id,
+  user_id: sam.id,
+  response_option_id: question3option1.id,
+  text: 'Sam'
 )

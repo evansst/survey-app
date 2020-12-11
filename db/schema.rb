@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_202949) do
     t.bigint "survey_id", null: false
     t.bigint "question_id", null: false
     t.bigint "user_id", null: false
-    t.bigint "response_option_id"
+    t.bigint "response_option_id", null: false
     t.string "text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
