@@ -10,5 +10,23 @@
   <%= @survey.due_date %>
 </p>
 
+<p>
+  <strong>Questions:</strong>
+  <ul>
+    <% @survey.questions.each do |question| %>
+      <li>
+        <p><%= question.text %></p>
+        <form>
+          <% question.response_options.each do |option| %>
+            <input type=<%="#{option.input_type}" %>>
+              <%= option.text %>
+            </input>
+          <% end %>
+        </form>
+      </li>
+    <% end %>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_survey_path(@survey) %> |
 <%= link_to 'Back', surveys_path %>
