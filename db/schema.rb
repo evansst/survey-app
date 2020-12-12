@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_202949) do
+ActiveRecord::Schema.define(version: 2020_12_12_012505) do
+
+  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+  end
 
   create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "text"
@@ -26,6 +34,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_202949) do
     t.bigint "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "next_question"
     t.index ["question_id"], name: "index_response_options_on_question_id"
   end
 
@@ -33,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_202949) do
     t.bigint "survey_id", null: false
     t.bigint "question_id", null: false
     t.bigint "user_id", null: false
-    t.bigint "response_option_id"
+    t.bigint "response_option_id", null: false
     t.string "text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -48,12 +57,13 @@ ActiveRecord::Schema.define(version: 2020_12_11_202949) do
     t.date "due_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "first_question"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "email_address"
+    t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

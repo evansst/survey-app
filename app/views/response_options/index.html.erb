@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Type</th>
+      <th>Input_Type</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,7 +13,7 @@
   <tbody>
     <% @response_options.each do |response_option| %>
       <tr>
-        <td><%= response_option.type %></td>
+        <td><%= response_option.input_type %></td>
         <td><%= link_to 'Show', response_option %></td>
         <td><%= link_to 'Edit', edit_response_option_path(response_option) %></td>
         <td><%= link_to 'Destroy', response_option, method: :delete, data: { confirm: 'Are you sure?' } %></td>

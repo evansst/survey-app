@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+  get 'sessions/create'
+  get 'sessions/destroy'
+  resources :admins
   resources :response_options
   resources :responses
   resources :users
