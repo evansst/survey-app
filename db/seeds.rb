@@ -55,7 +55,7 @@ question3option1 = ResponseOption.create(
 sam = User.create(
   first_name: 'Sam',
   last_name: 'Evans',
-  email_address: 'evans.sam.t@gmail.com'
+  email: 'evans.sam.t@gmail.com'
 )
 
 Response.create(
